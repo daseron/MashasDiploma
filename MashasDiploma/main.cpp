@@ -13,12 +13,12 @@ int main(int argc, char * argv[]) {
     ofstream F ("GraphicPoints.txt");
     cout.precision(8);
     
-    const double U=1;
+    const double U=0.5;
     
     const int N = 20;//количество точек по длинне
     const int M=100;//Количество временных слоев
     const double D=0.05;
-    const double T=0.01;
+    const double T=0.5;
     
     
     const double l = 1;//  длинна стержня в см
@@ -90,7 +90,7 @@ int main(int argc, char * argv[]) {
             
             
             if (i != 0 & i != N-1)
-                C2[i]= C[i] + Tau * (   (U * ((C[i+1]-C[i])/h))    +    (   D * ((C[i-1] - (2*C[i]) + C[i+1])/(h*h))  )    ) ;
+                C2[i]= C[i] + Tau * (   ((-U) * ((C[i+1]-C[i])/h))    +    (   D * ((C[i-1] - (2*C[i]) + C[i+1])/(h*h))  )    ) ;
             if (i == 0)
                 C2[i]=0;
             if (i == N - 1)
@@ -107,12 +107,14 @@ int main(int argc, char * argv[]) {
 
     
     for (int i = 0 ; i < N ; ++i){ //начальные условия
-        F<<"\n["<<X[i]<<";"<<C[i]<<"]";
-        if( i != N-1)
-            F<<",";
+       // F<<"\n["<<X[i]<<";"<<C[i]<<"]";
+        //if( i != N-1)
+        //    F<<",";
+        F<<"\n"<<C[i];
+        
     }
     
-    //just a comment
+    
     
     delete [] C;
     delete [] C2;
